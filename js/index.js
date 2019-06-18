@@ -1,16 +1,19 @@
 // Your code goes here
 
 /* ten events
-[√] mouseover
-[ ] keydown
+[√] dblclick 
+[√] load
 [√] wheel 
+[√] click
+[√] mouseover
 [√] dragend
-[ ] load
 [√] focus
 [√] blur
-[√] click
 [√] change
-[√] dblclick 
+[√] keydown
+
+[√] Nest two similar events somewhere in the site and prevent the event propagation properly
+[√] Stop the navigation from items from refreshing the page by using preventDefault()
 */
 
 
@@ -36,11 +39,20 @@ introImg.addEventListener("dblclick", function()
     }
 });
 
-//load
-// window.addEventListener("load", event =>
-// {
+// load
+let busAnim = document.querySelector("#animate");
+let posTopStart = busAnim.offsetTop;
 
-// });
+let posLeftStart = document.querySelector(".container").offsetLeft
+window.addEventListener("load", event =>
+{
+    let pos = 0;
+    let animInterval = setInterval(() => {
+        pos++;
+        busAnim.style.left = pos + "px";
+        if (busAnim.offsetLeft > window.innerWidth - posLeftStart*2 - 80) {clearInterval(animInterval);}
+    }, 5);
+});
 
 // wheel
 document.addEventListener("wheel", function(event)
@@ -136,7 +148,6 @@ formInputs.forEach(elem => elem.addEventListener("blur", event =>
 
 // change event
 let selectEl = document.querySelector("select");
-console.log(selectEl)
 selectEl.addEventListener("change", event=>
 {
     let aSelVals = ["funInSun", "mntnExcursion", "islandGetaway"];
@@ -147,3 +158,20 @@ selectEl.addEventListener("change", event=>
         else                                        {elem.style.backgroundColor = startColor;}
     });
 });
+
+// prevent default from nav clicks (middle mouse click still works)
+document.querySelector("nav").addEventListener("click", function(event) 
+{
+    event.preventDefault();
+});
+
+// keydown
+window.addEventListener("keydown", event =>
+{
+    event.preventDefault();
+    if (event.keyCode === 27 && destForm.style.display === "flex")
+    {
+        destForm.style.display = "none";
+        signupButtons.forEach(elem => elem.style.backgroundColor = startColor);   
+    }
+})
