@@ -46,12 +46,16 @@ let posTopStart = busAnim.offsetTop;
 let posLeftStart = document.querySelector(".container").offsetLeft
 window.addEventListener("load", event =>
 {
-    let pos = 0;
-    let animInterval = setInterval(() => {
-        pos++;
-        busAnim.style.left = pos + "px";
-        if (busAnim.offsetLeft > window.innerWidth - posLeftStart*2 - 80) {clearInterval(animInterval);}
-    }, 5);
+    //original
+    // let pos = 0;
+    // let animInterval = setInterval(() => {
+    //     pos++;
+    //     busAnim.style.left = pos + "px";
+    //     if (busAnim.offsetLeft > window.innerWidth - posLeftStart*2 - 80) {clearInterval(animInterval);}
+    // }, 5);
+
+    //greensock style
+    TweenMax.to("#animate", 3, {x: window.innerWidth - posLeftStart*2 - 80})
 });
 
 // wheel
@@ -168,9 +172,9 @@ document.querySelector("nav").addEventListener("click", function(event)
 // keydown
 window.addEventListener("keydown", event =>
 {
-    event.preventDefault();
     if (event.keyCode === 27 && destForm.style.display === "flex")
     {
+        event.preventDefault();
         destForm.style.display = "none";
         signupButtons.forEach(elem => elem.style.backgroundColor = startColor);   
     }
