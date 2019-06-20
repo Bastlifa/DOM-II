@@ -350,3 +350,29 @@ img {
   background: #FFFFFF;
   color: #17A2B8;
 }
+.home .bottomForm {
+  margin: 4rem auto;
+  align-items: center;
+  display: none;
+  flex-flow: column nowrap;
+  font-size: 1.6rem;
+}
+.home .bottomForm input {
+  background: lightgray;
+}
+.home .bottomForm select {
+  background: lightgray;
+}
+.home #animContainer {
+  width: 5rem;
+  height: 3rem;
+  position: relative;
+}
+.home #animate {
+  width: 8rem;
+  height: 4rem;
+  position: absolute;
+  background: url(/img/bus.png) 0 0;
+  background-repeat: no-repeat;
+  background-size: contain, cover;
+}
